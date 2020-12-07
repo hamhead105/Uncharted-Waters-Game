@@ -138,6 +138,7 @@ public class Fish : MonoBehaviour
 
     void TargetPlayer()
     {
+        if (player.GetComponent<Player>().adventureMode) return;
         float adjacent = Mathf.Sqrt(Mathf.Pow(player.transform.position.x - this.transform.position.x, 2) + Mathf.Pow(player.transform.position.z - this.transform.position.z, 2));
         float opposite = player.transform.position.y - this.transform.position.y;
         xTargetDirection = -Mathf.Atan2(opposite, adjacent) * Mathf.Rad2Deg;

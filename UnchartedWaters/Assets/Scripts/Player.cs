@@ -37,6 +37,8 @@ public class Player : MonoBehaviour
     public GameObject startMenu;
     public int gameAFKTimer;
     public bool gameActive;
+    public bool adventureMode;
+    public Transform[] showSpots;
     
     // Start is called before the first frame update
     void Start()
@@ -58,6 +60,22 @@ public class Player : MonoBehaviour
         }
         if (!isDead)
         {
+            if (adventureMode)
+            {
+                if (Input.GetKeyDown(KeyCode.Alpha1))
+                {
+                    this.transform.position = showSpots[0].position;
+                }
+                if (Input.GetKeyDown(KeyCode.Alpha2))
+                {
+                    this.transform.position = showSpots[1].position;
+                }
+                if (Input.GetKeyDown(KeyCode.Alpha3))
+                {
+                    this.transform.position = showSpots[2].position;
+                }
+            }
+
             if (Input.GetKeyDown(KeyCode.P))
             {
                 Restart();
@@ -193,7 +211,7 @@ public class Player : MonoBehaviour
     public void Hit(float damage)
     {
         health -= damage;
-        if (health <= 0)
+        if (health <= 0 && !adventureMode)
         {
             Death();
         }
@@ -244,6 +262,6 @@ public class Player : MonoBehaviour
 
     public void CountTimer()
     {
-        if (gameActive) gameAFKTimer++;
+        if (gameActive && !adventureMode) gameAFKTimer++;
     }
 }   
